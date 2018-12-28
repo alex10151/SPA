@@ -1,0 +1,120 @@
+<form style="display: flex" [formGroup]="petReconForm">
+  <div style="display: flex;flex-direction: column">
+    <div style="display: flex">
+      <h4>Algorithm</h4>
+      <mat-form-field>
+        <mat-select placeholder="algorithm" [formControl]="algControl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let val of algType" [value]="val">
+            {{val}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="algControl.hasError('required')">Please choose a type</mat-error>
+      </mat-form-field>
+    </div>
+    <div style="display: flex">
+      <h4>Subset</h4>
+      <mat-form-field>
+        <mat-select placeholder="subset" [formControl]="subsetControl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let val of subset" [value]="val">
+            {{val}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="subsetControl.hasError('required')">Please choose a subset</mat-error>
+      </mat-form-field>
+    </div>
+    <div style="display: flex">
+      <h4>Iterations</h4>
+      <mat-form-field>
+        <input matInput type="number" placeholder="iterations" [formControl]="iterControl">
+        <mat-error *ngIf="iterControl.hasError('invalid')">invalid value</mat-error>
+      </mat-form-field>
+    </div>
+    <div style="display: flex"*ngIf="petReconForm.controls['algControl'].value=='FBP'||petReconForm.controls['algControl'].value=='2D-OSEM'">
+      <h4>Rebinning</h4>
+      <div >
+        <mat-form-field style="width: 100%">
+          <mat-select placeholder="type" [formControl]="rebinningControl" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let val of rebinning" [value]="val">
+              {{val}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="rebinningControl.hasError('required')">Please choose a type</mat-error>
+        </mat-form-field>
+      </div>
+      <div *ngIf="(petReconForm.controls['algControl'].value=='--')|| (petReconForm.controls['algControl'].value=='HD-RECON')"></div>
+
+    </div>
+    <div style="display: flex ;align-items: center;">
+      <h4>Offset</h4>
+      <h4 style="margin-left: 10px">X:</h4>
+      <mat-form-field style="width: 30%">
+        <input style="" matInput type="number" placeholder="mm" [formControl]="offsetXControl">
+      </mat-form-field>
+      <h4>Y:</h4>
+      <mat-form-field style="width: 30%">
+        <input matInput type="number" placeholder="mm" [formControl]="offsetYControl">
+      </mat-form-field>
+
+    </div>
+  </div>
+  <div style="display: flex;flex-direction: column">
+    <div style="display: flex">
+      <h4>Zoom</h4>
+      <mat-form-field>
+        <input matInput type="number" placeholder="zoom" [formControl]="zoomControl">
+        <mat-error *ngIf="zoomControl.hasError('invalid')">invalid value</mat-error>
+      </mat-form-field>
+    </div>
+    <div style="display: flex">
+      <h4>Image Matrix</h4>
+      <mat-form-field style="width: 50%">
+        <mat-select placeholder="type" [formControl]="imgSizeControl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let val of imgSize" [value]="val">
+            {{val}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="imgSizeControl.hasError('required')">Please choose a size</mat-error>
+      </mat-form-field>
+    </div>
+    <div style="display: flex">
+      <h4>Filter</h4>
+      <mat-form-field style="width: 50%">
+        <mat-select placeholder="type" [formControl]="filterControl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let val of filter" [value]="val">
+            {{val}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="filterControl.hasError('required')">Please choose a filter</mat-error>
+      </mat-form-field>
+    </div>
+    <div style="display: flex">
+      <h4>FWHM(mm)</h4>
+      <mat-form-field>
+        <input matInput type="number" placeholder="mm" [formControl]="fwhmControl">
+        <mat-error *ngIf="fwhmControl.hasError('invalid')">invalid value</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div style="display: flex;flex-direction: column;margin-left: 5%">
+    <div style="display: flex; flex-direction: column">
+      <h4>Attenuation correction CT</h4>
+      <mat-form-field style="width: 100%">
+        <mat-select placeholder="type" [formControl]="correctControl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let val of correction" [value]="val">
+            {{val}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="correctControl.hasError('required')">Please choose a image</mat-error>
+      </mat-form-field>
+    </div>
+    <mat-checkbox style="margin-top: 10px;margin-bottom: 10px">Scatter correction</mat-checkbox>
+    <mat-checkbox style="margin-top: 10px;margin-bottom: 10px">Save u-map image</mat-checkbox>
+    <mat-checkbox style="margin-top: 10px;margin-bottom: 10px">Match CT slice location</mat-checkbox>
+  </div>
+</form>

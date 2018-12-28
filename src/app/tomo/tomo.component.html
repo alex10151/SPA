@@ -1,0 +1,49 @@
+
+<form style="display: flex" [formGroup]="tomoScanForm">
+  <div style="display: flex;flex-direction: column">
+    <div style="display: flex">
+      <h4>kV</h4>
+      <mat-form-field>
+        <mat-select placeholder="kv" [formControl]="kVControl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let kv of kVValue" [value]="kv">
+            {{kv}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="kVControl.hasError('required')">Please choose a voltage</mat-error>
+      </mat-form-field>
+      <h4>mA</h4>
+      <mat-form-field>
+        <input matInput type="number" placeholder="mA" [formControl]="mAControl">
+        <mat-error *ngIf="mAControl.hasError('invalid')"> invalid value</mat-error>
+      </mat-form-field>
+    </div>
+    <div style="display: flex">
+      <h4>Tomogram length</h4>
+      <mat-form-field>
+        <input matInput type="number" placeholder="length" [formControl]="lengthControl">
+        <mat-error *ngIf="lengthControl.hasError('invalid')"> invalid value</mat-error>
+      </mat-form-field>
+      <h4>Tube position</h4>
+      <mat-form-field>
+        <mat-select [formControl]="tubePosControl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let pos of tubePosValue" [value]="pos">
+            {{pos}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="tubePosControl.hasError('required')">Please choose a degree</mat-error>
+      </mat-form-field>
+    </div>
+    <div style="display: flex">
+      <h4>Comments</h4>
+      <mat-form-field style="width: 80%">
+        <textarea matInput placeholder="comments here" [formControl]="commentsControl"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div style="display: flex;flex-direction: column">
+    <app-table-item></app-table-item>
+    <h1>Scan</h1>
+  </div>
+</form>

@@ -1,0 +1,91 @@
+<form style="display: flex" [formGroup]="ctScanForm">
+  <div>
+    <div style="display: flex">
+      <div>
+        <h4>kV</h4>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="kv" [formControl]="kVControl" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let kv of kVValue" [value]="kv">
+              {{kv}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="kVControl.hasError('required')">Please choose a voltage</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <h4>mA</h4>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput type="number" placeholder="mA" [formControl]="mAControl">
+          <mat-error *ngIf="mAControl.hasError('invalid')"> invalid value</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div style="display: flex">
+      <div>
+        <h4>Start</h4>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput type="number" placeholder="mm" [formControl]="startControl">
+        </mat-form-field>
+      </div>
+      <div>
+        <h4>End</h4>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput type="number" placeholder="mm" [formControl]="endControl">
+        </mat-form-field>
+      </div>
+    </div>
+    <div style="display: flex">
+      <div>
+        <h4>Pitch</h4>
+      </div>
+
+        <mat-button-toggle-group name="btnPitch" [formControl]="pitchControl">
+          <mat-button-toggle style="width: 20%" *ngFor="let x of pitchVal" value="x">
+            {{x}}
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+
+    </div>
+    <div style="display: flex">
+      <div style="height: 50%">
+        <h4>Rot.Time</h4>
+      </div>
+        <mat-button-toggle-group style="display: flex" name="btnRotTime" [formControl]="rotTimeControl">
+          <mat-button-toggle (click)="onPush(x)" style="width: 20%" value="x"
+                             *ngFor="let x of rotVal">{{ x }}s
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+  </div>
+
+  <div>
+    <div style="display: flex ;justify-content: center;">
+      <h4>Length</h4>
+      <mat-form-field>
+        <input matInput type="number" placeholder="length" [formControl]="lengthControl">
+        <mat-error *ngIf="lengthControl.hasError('invalid')">invalid value</mat-error>
+      </mat-form-field>
+      <h4>Scantime</h4>
+      <input matInput readonly placeholder="scan time">
+    </div>
+    <div style="display: flex">
+      <h4>Comments</h4>
+      <mat-form-field style="width: 50%">
+        <textarea  [formControl]="commentsControl" matInput placeholder="comments here"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div>
+    <app-table-item></app-table-item>
+  </div>
+</form>
+

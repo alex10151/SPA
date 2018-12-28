@@ -1,0 +1,113 @@
+<form style="display: flex" [formGroup]="ctReconForm">
+  <div style="display:flex;flex-direction: column">
+    <div style="display: flex">
+      <div>
+        <h4>Filter</h4>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="filter" [formControl]="filterControl" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let fval of filterValue" [value]="fval">
+              {{fval}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="filterControl.hasError('required')">Please choose a filter</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div style="display: flex">
+      <div>
+        <h4>Thickness</h4>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="thickness" [formControl]="thicknessControl" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let tval of thicknessValue" [value]="tval">
+              {{tval}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="thicknessControl.hasError('required')">Please choose a thickness</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div style="display: flex">
+      <div>
+        <h4>Increment</h4>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Increment" [formControl]="incrementControl" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let ival of incrementControlValue" [value]="ival">
+              {{ival}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="incrementControl.hasError('required')">Please choose a increment</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div style="display: flex">
+      <div>
+        <h4>Windowing</h4>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Windowing" [formControl]="windowingControl" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let wval of windowingControlValue" [value]="wval">
+              {{wval}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="windowingControl.hasError('required')">Please choose a windowing</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div style="display: flex; flex-direction: column">
+    <div style="display: flex ;justify-content: center;">
+      <h4>Offset</h4>
+      <h4 style="margin-left: 10px">X:</h4>
+      <input matInput type="number" placeholder="mm" [formControl]="offsetXControl">
+      <h4>Y:</h4>
+      <input matInput type="number" placeholder="mm" [formControl]="offsetYControl">
+    </div>
+    <div style="display: flex ;justify-content: center;">
+      <h4>FOV</h4>
+      <mat-form-field>
+        <input matInput type="number" placeholder="40-520" [formControl]="fovControl">
+        <mat-error *ngIf="fovControl.hasError('invalid')">invalid value</mat-error>
+      </mat-form-field>
+      <h4>image matrix</h4>
+      <mat-form-field>
+        <mat-select placeholder="size" [formControl]="imageMatrixControl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let imgval of imageMatrixControlValue" [value]="imgval">
+            {{imgval}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="imageMatrixControl.hasError('required')">Please choose a size</mat-error>
+      </mat-form-field>
+    </div>
+    <div style="display: flex">
+      <h4>Comments</h4>
+      <mat-form-field style="width: 50%">
+        <textarea [formControl]="commentsControl" matInput placeholder="comments here"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div>
+    <div style="display: flex;flex-direction: column">
+      <mat-checkbox style="margin-top: 10px;margin-bottom: 10px">Metal artifact reduction</mat-checkbox>
+      <mat-checkbox style="margin-top: 10px;margin-bottom: 10px">Bone artifact reduction</mat-checkbox>
+      <div style="display: flex;align-items: center;margin-top: 10px;margin-bottom: 10px">
+        <mat-checkbox>De-noising</mat-checkbox>
+        <mat-form-field>
+          <input matInput type="number" placeholder="0-1" [formControl]="denoiseControl">
+          <mat-error *ngIf="denoiseControl.hasError('invalid')">invalid value</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,108 @@
+<form style="display: flex" [formGroup]="petScanForm">
+  <div style="display: flex;flex-direction: column">
+    <div style="display: flex">
+      <h4>Pharmaceutical</h4>
+      <mat-form-field>
+        <mat-select placeholder="reagent type" [formControl]="pharmControl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let pval of reagent" [value]="pval">
+            {{pval}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="pharmControl.hasError('required')">Please choose a type</mat-error>
+      </mat-form-field>
+    </div>
+    <div style="display: flex">
+      <h4>Isotope</h4>
+      <mat-form-field>
+        <mat-select placeholder="Isotope" [formControl]="IsotopeControl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let ival of Isotope" [value]="ival">
+            {{ival}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="IsotopeControl.hasError('required')">Please choose a type</mat-error>
+      </mat-form-field>
+    </div>
+    <div style="display: flex">
+      <h4>Injection Dose</h4>
+      <mat-form-field style="width: 30%">
+        <input matInput type="number" placeholder="dosage" [formControl]="doseControl">
+        <mat-error *ngIf="doseControl.hasError('invalid')">invalid value</mat-error>
+      </mat-form-field>
+      <mat-form-field style="width: 20%">
+        <mat-select placeholder="unit" [formControl]="unitControl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let uval of unit" [value]="uval">
+            {{uval}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="unitControl.hasError('required')">Please choose a unit</mat-error>
+      </mat-form-field>
+    </div>
+    <div style="display: flex">
+      <h4>Injection Date</h4>
+      <mat-form-field>
+        <input matInput type="date" placeholder="date" [formControl]="dateControl">
+      </mat-form-field>
+    </div>
+    <div style="display: flex">
+      <h4>Injection Time</h4>
+      <mat-form-field>
+        <input matInput type="time" placeholder="time" [formControl]="timeControl">
+      </mat-form-field>
+    </div>
+  </div>
+  <div style="display: flex;flex-direction: column">
+    <div style="display: flex;align-items: center">
+      <h4>Scan Range</h4>
+      <mat-checkbox>match CT</mat-checkbox>
+    </div>
+    <div style="display: flex">
+      <h4>Scan duration/bed</h4>
+      <mat-form-field style="width: 30%">
+        <input matInput type="number" placeholder="value" [formControl]="durValControl">
+        <mat-error *ngIf="durValControl.hasError('invalid')"> invalid value</mat-error>
+      </mat-form-field>
+      <mat-form-field style="width: 20%">
+        <mat-select placeholder="duration" [formControl]="durationControl" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let durval of duration" [value]="durval">{{durval}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="durationControl.hasError('required')"> please choose a duration</mat-error>
+      </mat-form-field>
+    </div>
+    <div style="display: flex;align-items: center">
+      <h4>
+        No.
+      </h4>
+      <mat-form-field>
+        <input matInput type="number" placeholder="number" [formControl]="bedControl">
+        <mat-error *ngIf="bedControl.hasError('invalid')"> invalid value</mat-error>
+      </mat-form-field>
+      <h4>
+        of beds
+      </h4>
+    </div>
+    <div style="display: flex;align-items: center">
+      <h4>
+        Overlap
+      </h4>
+      <mat-form-field>
+        <input matInput type="number" placeholder="percentage" [formControl]="overlapControl">
+        <mat-error *ngIf="overlapControl.hasError('invalid')"> invalid value</mat-error>
+      </mat-form-field>
+      <h4>
+        %
+      </h4>
+    </div>
+    <div style="display: flex;align-items: center">
+      <h4>Comments</h4>
+      <textarea matInput style="width: 70%;height: 50%" placeholder="comments here"
+                [formControl]="commentsControl"></textarea>
+    </div>
+  </div>
+  <div>
+    <app-table-item></app-table-item>
+  </div>
+</form>
